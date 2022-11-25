@@ -97,8 +97,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "welcomin:build:production",
+            "firebaseProject": "welcomin-ic",
+            "firebaseHostingSite": "welcomin-ic"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "9a94ebee-71ee-492d-8577-84f738c0b594"
   }
 }

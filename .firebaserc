@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "welcomin-ic": {
+      "hosting": {
+        "welcomin": [
+          "welcomin-ic"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "welcomin-ic"
+  }
+}
