@@ -1,0 +1,10 @@
+:host {
+  .templates-list {
+    row-gap: 32px;
+    app-template-card{
+      margin-right: 16px;
+      margin-left: 16px;
+      justify-self: center;
+    }
+  }
+}

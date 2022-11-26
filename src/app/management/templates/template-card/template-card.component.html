@@ -1,0 +1,18 @@
+<a [routerLink]="routerLink">
+  <mat-card>
+    <ng-container *ngIf="isEmpty; else templateSaved">
+      <mat-card-content class="d-flex justify-content-center align-items-center h-100">
+      <span class="material-symbols-outlined add-template-icon">
+        add
+      </span>
+      </mat-card-content>
+    </ng-container>
+    <ng-template #templateSaved>
+      <img width="220" src="/assets/placeholder.svg">
+      <mat-card-content>
+        <h5 class="my-3">#Portuguese Devs</h5>
+        <p>Lorem ipsum dolor sit amet consectetur. </p>
+      </mat-card-content>
+    </ng-template>
+  </mat-card>
+</a>

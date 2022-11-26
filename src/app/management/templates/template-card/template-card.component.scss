@@ -1,0 +1,23 @@
+@use "@angular/material" as mat;
+
+:host {
+  --mdc-elevated-card-container-shape: 20px;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: initial;
+  }
+
+  mat-card {
+    width: 220px;
+    height: 255px;
+    overflow: hidden;
+    @include mat.overridable-elevation(6, rgba(0, 0, 0, 0.15));
+
+    .add-template-icon {
+      font-size: 72px;
+      color: var(--bs-gray-500);
+    }
+  }
+}
