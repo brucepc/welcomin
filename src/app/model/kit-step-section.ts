@@ -7,7 +7,8 @@ export enum KitStepSectionType {
   FILE = 'FILE',
   LINK = 'LINK',
   DYNAMIC_VIDEO = 'DYNAMIC_VIDEO',
-  QUIZ = 'QUIZ'
+  QUIZ = 'QUIZ',
+  EMPTY = 'EMPTY'
 }
 
 export class KitStepSection {
@@ -17,6 +18,9 @@ export class KitStepSection {
     public type: KitStepSectionType
   ) {
   }
+}
+
+export class KitStepSectionPartialCollection extends Array<Partial<KitStepSection>> {
 }
 
 export class KitStepSectionCollection extends Array<KitStepSection> {

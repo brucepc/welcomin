@@ -1,0 +1,19 @@
+<div class="d-flex h-100">
+  <div class="welcome-background"></div>
+  <div class="login-screen d-flex align-items-center justify-content-center">
+    <div class="d-flex flex-column">
+      <div class="pb-5">
+        <img height="57" src="assets/logo.svg">
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label fw-bold">Username</label>
+        <input type="email" class="form-control p-2" id="username" placeholder="name@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label fw-bold">Password</label>
+        <input type="email" class="form-control p-2" id="password" placeholder="******">
+      </div>
+      <button mat-raised-button [routerLink]="['..','management']" color="primary" class="bg-black p-4">Log in</button>
+    </div>
+  </div>
+</div>

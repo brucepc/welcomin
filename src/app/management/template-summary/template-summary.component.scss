@@ -1,0 +1,42 @@
+
+:host {
+  .share-container {
+    background-color: #F7F9FB;
+    width: 50vw;
+  }
+
+  .share-summary {
+    width: 50vw;
+  }
+
+  .summary-index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #2964F8;
+    color: white;
+    min-width: 2em;
+    min-height: 2em;
+    margin-right: 1em;
+  }
+
+  .summary-item {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+  }
+
+  .summary-item + .summary-item {
+    .summary-index::before {
+      content: "";
+      position: absolute;
+      left: 1em;
+      border-left-width: 2px;
+      border-left-style: solid;
+      border-color: var(--bs-gray-400);
+      top: -1.3rem;
+      height: 1rem;
+    }
+  }
+}

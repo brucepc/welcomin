@@ -1,0 +1,26 @@
+@use "bootstrap/scss/bootstrap.scss" as bs;
+
+:host {
+  .welcome-background {
+    content: "";
+    height: 100%;
+    background-image: url("/assets/bg.svg");
+  }
+
+  .login-screen {
+    height: 100%;
+  }
+
+  .welcome-background, .login-screen {
+    flex-basis: 50%;
+  }
+
+  @include bs.media-breakpoint-down(sm) {
+    .welcome-background {
+      display: none;
+    }
+    .login-screen {
+      flex-basis: 100%;
+    }
+  }
+}

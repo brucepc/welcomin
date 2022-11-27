@@ -1,0 +1,10 @@
+:host {
+
+  ::ng-deep .mat-step-label {
+    flex-basis: 100%;
+  }
+
+  ::ng-deep .mat-step-icon {
+    background-color: black;
+  }
+}

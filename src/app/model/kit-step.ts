@@ -11,3 +11,6 @@ export class KitStep {
 
 export class KitStepCollection extends Array<KitStep> {
 }
+
+export class KitStepPartialCollection extends Array<Partial<KitStep>> {
+}

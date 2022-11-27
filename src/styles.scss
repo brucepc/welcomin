@@ -45,10 +45,27 @@ body {
 }
 
 
-$containerWidth: 400;
+$containerWidth: 24 400 535 292;
 @each $cw in $containerWidth {
   .cw-#{$cw} {
     width: #{$cw}px;
   }
 }
 
+$containerWidthMax: 473;
+@each $cw in $containerWidthMax {
+  .cwm-#{$cw} {
+    max-width: #{$cw}px;
+  }
+}
+
+$fontSize: 412;
+@each $fs in $fontSize {
+  .fs-#{$fs} {
+    font-size: #{$fs}px;
+  }
+}
+
+.cursor-grab {
+  cursor: grab;
+}

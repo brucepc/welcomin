@@ -1,1 +1,37 @@
-<p>template-preview works!</p>
+<div class="d-flex flex-column h-100">
+  <h2 class="font-weight-bolder mb-4">Devs coming to Portugal kit</h2>
+  <mat-stepper orientation="vertical" #stepper class="w-100">
+    <ng-container *ngFor="let step of steps">
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="d-flex align-items-center w-100">
+            <div class="flex-fill"><b>Step {{step.order + 1}} - </b>{{step.name}}</div>
+            <button mat-icon-button (click)="$event.stopImmediatePropagation()">
+              <span class="material-symbols-outlined">edit_square</span>
+            </button>
+            <button mat-icon-button (click)="$event.stopImmediatePropagation()">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+        </ng-template>
+        <div class="step-content">
+          <ng-container *ngFor="let section of step.sections">
+            <div class="step-section">
+              <ng-container [ngSwitch]="section.type">
+                <ng-container *ngSwitchDefault>{{section.content}}</ng-container>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </mat-step>
+    </ng-container>
+  </mat-stepper>
+  <div class="d-flex justify-content-end mt-5 gap-3">
+    <button mat-raised-button class="p-4">
+      Add new step
+    </button>
+    <button mat-raised-button [routerLink]="['..','summary']" color="primary" class="p-4 bg-black">
+      Finish welcome kit
+    </button>
+  </div>
+</div>
