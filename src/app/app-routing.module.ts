@@ -6,7 +6,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'management', loadChildren: () => import('./management/management.module').then(m => m.ManagementModule)},
   {path: ':templateId', loadChildren: () => import('./reply/reply.module').then(m => m.ReplyModule)},
-  {path: '', redirectTo: 'login', pathMatch: 'full'}
+  {path: '', redirectTo: 'management', pathMatch: 'full'}
 ];
 
 @NgModule({
