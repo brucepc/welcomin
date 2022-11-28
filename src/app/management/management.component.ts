@@ -1,4 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
+import {WelcomeKitService} from "../services/welcome-kit.service";
+import {Observable} from "rxjs";
+import {WelcomeKit} from "../model/welcome-kit";
 
 @Component({
   selector: 'app-management',
@@ -6,5 +9,4 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./management.component.scss']
 })
 export class ManagementComponent {
-
 }

@@ -5,7 +5,7 @@
       <mat-step>
         <ng-template matStepLabel>
           <div class="d-flex align-items-center w-100">
-            <div class="flex-fill"><b>Step {{step.order + 1}} - </b>{{step.name}}</div>
+            <div class="flex-fill"><b>Step {{step.order}} - </b>{{step.name}}</div>
             <button mat-icon-button (click)="$event.stopImmediatePropagation()">
               <span class="material-symbols-outlined">edit_square</span>
             </button>
@@ -27,7 +27,7 @@
     </ng-container>
   </mat-stepper>
   <div class="d-flex justify-content-end mt-5 gap-3">
-    <button mat-raised-button class="p-4">
+    <button mat-raised-button [routerLink]="['..', 'add-step',steps.length +1]" class="p-4">
       Add new step
     </button>
     <button mat-raised-button [routerLink]="['..','summary']" color="primary" class="p-4 bg-black">

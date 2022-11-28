@@ -1,9 +1,9 @@
 <div class="d-flex flex-column align-items-center h-100">
   <ng-container *ngIf="!isTitleFormDone; else stepContentForm">
     <h3 class="m-3 mt-5">
-      Step {{step}}
+      Step {{stepOrder}}
     </h3>
-    <h2 *ngIf="step==1" class="cw-400 fw-bolder my-3 text-center">This is the first step of your kit, give it a
+    <h2 *ngIf="stepOrder==1" class="cw-400 fw-bolder my-3 text-center">This is the first step of your kit, give it a
       name</h2>
     <div [formGroup]="stepTitleForm">
       <div class="cw-400 my-3">
@@ -26,11 +26,11 @@
     <h2 class="fw-bolder">{{kitTitle}}</h2>
     <div class="d-flex mb-3">
       <h3 class="m-3">
-        Step {{step}}
+        Step {{stepOrder}}
       </h3>
       <h3 class="my-3 fw-light">{{stepName}}</h3>
     </div>
-    <div cdkDropList (cdkDropListDropped)="drop($event)" class="d-flex flex-column cw-535">
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="d-flex flex-column gap-3 cw-535">
       <ng-container *ngFor="let section of sections">
         <ng-container [ngSwitch]="section.type">
           <ng-container *ngSwitchCase="'EMPTY'">
@@ -45,7 +45,8 @@
               <div class="step-content cwm-473">{{section.content}}</div>
               <mat-card class="section-type-panel d-flex m-3 flex-wrap p-3 gap-2">
                 <div class="type-panel-row d-flex justify-content-between gap-2">
-                  <button class="mx-2" [style.height.px]="65" [style.width.px]="150" mat-button>
+                  <button class="mx-2" (click)="section.type = $any('PARAGRAPH')" [style.height.px]="65"
+                          [style.width.px]="150" mat-button>
                     <div class="d-flex flex-column">
                       <div class="material-symbols-outlined">view_headline</div>
                       <span class="fs-12">Paragraph</span>
@@ -116,7 +117,11 @@
                     [cdkDragHandleDisabled]="sections.length<2"
                     [class.invisible]="sections.length<2"
                     class="p-3 cursor-grab material-symbols-outlined">drag_indicator</span>
-              <div class="step-content cwm-473">{{section.content}}</div>
+              <div class="step-content flex-fill">
+                <app-section-form
+                  [ngModel]="section"
+                  (ngModelChange)="onSectionChange()"></app-section-form>
+              </div>
             </div>
           </ng-container>
         </ng-container>
@@ -138,6 +143,7 @@
     <div class="p-3"></div>
     <button mat-raised-button [routerLink]="previewKitLink" class="p-4">Preview kit</button>
     <button mat-raised-button
+            (click)="addNewStep()"
             class="bg-black p-4"
             color="primary">Add new step
     </button>

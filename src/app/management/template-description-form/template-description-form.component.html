@@ -2,17 +2,23 @@
   <h1 class="fw-bolder my-3">New welcome kit</h1>
   <div [formGroup]="form">
     <div class="cw-400">
-      <label for="templateTitle" class="form-label fw-bold">Title</label>
+      <label for="templateTitle" class="form-label fw-bold">Title *</label>
       <input type="text" matInput formControlName="title"
+             required
              class="form-control p-3" id="templateTitle" placeholder="e.g.: Devs Coming to Portugal">
     </div>
     <div class="my-4 cw-400">
-      <label for="templateDescription" class="form-label fw-bold">Title</label>
+      <label for="templateDescription" class="form-label fw-bold">Description *</label>
       <textarea type="text" rows="4" formControlName="description"
                 class="form-control p-3" id="templateDescription"
+                required
                 placeholder="e.g.: Welcome kit for devs in need of a visa"></textarea>
     </div>
-    <button [routerLink]="['..', 1234,'add-step',1]" class="w-100 bg-black p-4"
+    <button (click)="onSave()"
+            [disabled]="isSaving || form.invalid"
+            [class.bg-gray]="form.invalid || isSaving"
+            [class.bg-black]="form.valid"
+            class="w-100 p-4"
             color="primary" type="button" mat-raised-button>Let’s start configuring it
     </button>
   </div>

@@ -12,14 +12,16 @@ import {TemplateDescriptionFormComponent} from './template-description-form/temp
 import {TemplatePreviewComponent} from './template-preview/template-preview.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TemplateStepFormComponent} from './template-step-form/template-step-form.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatStepperModule} from "@angular/material/stepper";
-import { TemplateSummaryComponent } from './template-summary/template-summary.component';
+import {TemplateSummaryComponent} from './template-summary/template-summary.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
+import { SectionFormComponent } from './template-step-form/section-form/section-form.component';
+import {MatRippleModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -31,22 +33,25 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     TemplatePreviewComponent,
     TemplateStepFormComponent,
     TemplateSummaryComponent,
+    SectionFormComponent,
   ],
-  imports: [
-    CommonModule,
-    ManagementRoutingModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatTooltipModule,
-    DragDropModule,
-    MatExpansionModule,
-    MatStepperModule,
-    ClipboardModule
-  ]
+    imports: [
+        CommonModule,
+        ManagementRoutingModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatTooltipModule,
+        DragDropModule,
+        MatExpansionModule,
+        MatStepperModule,
+        ClipboardModule,
+        FormsModule,
+        MatRippleModule,
+    ],
 })
 export class ManagementModule {
 }

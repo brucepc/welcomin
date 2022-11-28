@@ -1,6 +1,8 @@
 <div class="d-flex">
   <div class="templates-list d-flex flex-wrap">
-    <app-template-card [template]="{id:123}"></app-template-card>
+    <ng-container *ngFor="let template of items | async">
+      <app-template-card [template]="template"></app-template-card>
+    </ng-container>
     <app-template-card></app-template-card>
   </div>
 </div>

@@ -11,7 +11,7 @@ import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 import {ComModule} from './com/com.module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
@@ -19,19 +19,19 @@ import {MatButtonModule} from "@angular/material/button";
     AppComponent,
     LoginComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ComModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        // provideFunctions(() => getFunctions()),
-        // providePerformance(() => getPerformance()),
-        provideFirestore(() => getFirestore()),
-        provideStorage(() => getStorage()),
-        MatButtonModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ComModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    // provideFunctions(() => getFunctions()),
+    // providePerformance(() => getPerformance()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    MatButtonModule,
+  ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline', floatLabel: 'always'}

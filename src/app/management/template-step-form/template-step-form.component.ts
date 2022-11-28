@@ -1,8 +1,16 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {KitStepSection, KitStepSectionPartialCollection, KitStepSectionType} from "../../model/kit-step-section";
+import {ActivatedRoute, Router} from "@angular/router";
+import {
+  KitStepSection,
+  KitStepSectionCollection,
+  KitStepSectionPartialCollection,
+  KitStepSectionType
+} from "../../model/kit-step-section";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {WelcomeKitService} from "../../services/welcome-kit.service";
+import {WelcomeKit} from "../../model/welcome-kit";
+import {KitStep} from "../../model/kit-step";
 
 @Component({
   selector: 'app-template-step-form',
@@ -11,18 +19,13 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 })
 export class TemplateStepFormComponent {
   isTitleFormDone = false;
-  readonly step: number;
+  readonly stepOrder: number;
+  step: Partial<KitStep> = {};
   stepTitleForm: FormGroup;
-  sections: KitStepSectionPartialCollection = [
-    {
-      order: 1,
-      type: KitStepSectionType.PARAGRAPH,
-      content: `Lorem ipsum dolor sit amet consectetur. Amet in quis consequat sed ut tempus quis orci. Ultricies vitae
-            ornare
-            eget nisl augue lacus nibh. Felis nibh mauris aliquam massa diam metus. Adipiscing diam vulputate augue
-            ultrices.`
-    },
-  ];
+  sections: KitStepSectionPartialCollection = [];
+  private kitId: string;
+  private welcomeKit!: WelcomeKit;
+
   previewKitLink: any[] = [];
 
   get hasSection(): boolean {
@@ -38,12 +41,31 @@ export class TemplateStepFormComponent {
   }
 
   constructor(
-    public fb: FormBuilder,
-    public route: ActivatedRoute
+    private welcomeKitService: WelcomeKitService,
+    private readonly activatedroute: ActivatedRoute,
+    private readonly router: Router,
+    public fb: FormBuilder
   ) {
     this.stepTitleForm = this.buildForm();
-    this.step = this.route.snapshot.params['step'];
+    this.stepOrder = parseInt(this.activatedroute.snapshot.params['step']);
     this.previewKitLink = ['../..', 'preview']
+    this.kitId = this.activatedroute.snapshot.params['id'];
+  }
+
+  ngOnInit() {
+    const subs = this.welcomeKitService.get(this.kitId)
+      .subscribe({
+        next: (wk: WelcomeKit) => {
+          this.welcomeKit = wk;
+          const found = (wk.steps || []).find(s => s.order === this.stepOrder);
+          if (found) {
+            this.step = found;
+            this.sections = (found.sections || []) as KitStepSectionPartialCollection;
+            this.stepTitleForm.patchValue({title: this.step?.name});
+          }
+          subs.unsubscribe();
+        }
+      })
   }
 
   buildForm(): FormGroup {
@@ -54,7 +76,16 @@ export class TemplateStepFormComponent {
 
   submitTitleForm() {
     if (this.stepTitleForm.valid) {
-      this.isTitleFormDone = true;
+      this.step = this.step.name ? this.step : {
+        name: this.stepName,
+        order: this.stepOrder,
+        sections: []
+      } as Partial<KitStep>;
+
+      this.welcomeKitService.putStep(this.welcomeKit as any, this.step)
+        .then(() => {
+          this.isTitleFormDone = true;
+        });
     }
   }
 
@@ -66,8 +97,12 @@ export class TemplateStepFormComponent {
   }
 
   deleteSection(section: Partial<KitStepSection>) {
+    console.log(section);
     if (section.order) {
-      this.sections = this.sections.splice(section.order, 1);
+      this.sections.splice(section.order, 1);
+      if (section.type !== KitStepSectionType.EMPTY) {
+        this.onSectionChange();
+      }
     }
   }
 
@@ -75,6 +110,19 @@ export class TemplateStepFormComponent {
     moveItemInArray(this.sections, $event.previousIndex, $event.currentIndex);
     this.sections.forEach((item, index) => {
       item.order = index;
-    })
+    });
+    this.onSectionChange();
+  }
+
+  onSectionChange() {
+    this.step.sections = this.sections as KitStepSectionCollection;
+    console.log(this.welcomeKit);
+    return this.welcomeKitService.putStep(this.welcomeKit as any, this.step)
+      .then();
+  }
+
+  addNewStep() {
+    this.onSectionChange()
+      .then(() => this.router.navigate(['./..', this.welcomeKit.steps.length + 1]))
   }
 }

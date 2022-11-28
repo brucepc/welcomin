@@ -1,0 +1,10 @@
+<ng-container *ngIf="section" [ngSwitch]="section.type">
+  <ng-container *ngSwitchDefault>
+    <textarea class="w-100 form-control"
+              #textRef
+              rows="10"
+              [ngModel]="section.content"
+              (focusout)="onSave(textRef.value)"
+    ></textarea>
+  </ng-container>
+</ng-container>

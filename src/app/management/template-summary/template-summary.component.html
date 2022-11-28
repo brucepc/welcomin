@@ -11,7 +11,7 @@
         <span class="material-symbols-outlined">delete</span>
       </button>
     </div>
-    <h2 class="font-weight-bolder mb-4">Devs coming to Portugal kit</h2>
+    <h2 class="font-weight-bolder mb-4">{{kitTitle}}</h2>
     <div class="w-100 d-flex flex-column gap-4">
       <ng-container *ngFor="let step of steps">
         <div class="summary-item">
@@ -30,15 +30,17 @@
     <div class="share-container__form cw-400">
       <h2>Share it</h2>
       <div class="py-3 input-group">
-        <input type="email" readonly class="form-control p-2" id="formControlLink">
-        <span cdkCopyToClipboard="LINKOK"
+        <input type="email" [value]="replyURL" readonly class="form-control p-2" id="formControlLink">
+        <span matRipple [cdkCopyToClipboard]="replyURL"
               class="input-group-text cursor-pointer p-2 material-symbols-outlined">assignment</span>
       </div>
       <div class="py-3">
         <label for="formControlEmail" class="form-label fw-bold">Email</label>
-        <input type="email" class="form-control p-2" id="formControlEmail">
+        <input type="email" [disabled]="true" class="form-control p-2" id="formControlEmail">
       </div>
-      <button mat-raised-button color="primary" class="bg-black w-100 p-4 mt-3">Send by email -></button>
+      <button mat-raised-button color="primary" [disabled]="true"
+              class="bg-gray w-100 p-4 mt-3">Send by email ->
+      </button>
     </div>
   </div>
 </div>
